@@ -27,8 +27,8 @@ func onReady() {
 	// Start WebSocket server in background
 	go startServer()
 
-	// TODO: Start mDNS announcement in background
-	// go announceOnLAN()
+	// Start mDNS announcement in background
+	go announceOnLAN()
 
 	// Handle menu clicks
 	go func() {

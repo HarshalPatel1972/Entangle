@@ -20,6 +20,8 @@ class TransferService : Service() {
         val bundle = intent?.getBundleExtra("transfer_data") ?: return START_NOT_STICKY
 
         scope.launch {
+            handleEdgeCases()
+
             val desktop = withTimeoutOrNull(8000) { findDesktop(applicationContext) }
 
             if (desktop == null) {
@@ -52,6 +54,15 @@ class TransferService : Service() {
         }
 
         return START_NOT_STICKY
+    }
+
+    private suspend fun handleEdgeCases() {
+        val cm = applicationContext.getSystemService(android.content.Context.CONNECTIVITY_SERVICE) as android.net.ConnectivityManager
+        val activeNetwork = cm.activeNetworkInfo
+        val isWiFi = activeNetwork?.type == android.net.ConnectivityManager.TYPE_WIFI
+        if (!isWiFi) {
+            showNotification("Entangle", "Connect to WiFi to share with your laptop")
+        }
     }
 
     private suspend fun transferFile(desktop: DesktopInfo, uri: Uri, mimeType: String) {

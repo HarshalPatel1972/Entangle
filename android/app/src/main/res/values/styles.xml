@@ -1,0 +1,7 @@
+<resources>
+    <style name="Theme.Entangle" parent="Theme.AppCompat.Light.NoActionBar"/>
+    <style name="Theme.Entangle.Translucent" parent="Theme.AppCompat.Translucent">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+    </style>
+</resources>

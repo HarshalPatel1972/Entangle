@@ -67,12 +67,3 @@ func handleTransfer(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-// Stubs for Phase D4
-func receiveFile(conn *websocket.Conn, header TransferHeader) {
-	conn.WriteMessage(websocket.TextMessage, []byte(`{"status":"ready"}`))
-	conn.WriteMessage(websocket.TextMessage, []byte(`{"status":"complete"}`))
-}
-
-func receiveText(conn *websocket.Conn, header TransferHeader) {
-	conn.WriteMessage(websocket.TextMessage, []byte(`{"status":"complete"}`))
-}

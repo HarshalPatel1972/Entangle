@@ -24,8 +24,8 @@ func onReady() {
 	mOpen := systray.AddMenuItem("Open Downloads", "")
 	mQuit := systray.AddMenuItem("Quit Entangle", "")
 
-	// TODO: Start WebSocket server in background
-	// go startServer()
+	// Start WebSocket server in background
+	go startServer()
 
 	// TODO: Start mDNS announcement in background
 	// go announceOnLAN()

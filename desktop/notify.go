@@ -1,8 +1,7 @@
 package main
 
-import "log"
+import "github.com/gen2brain/beeep"
 
-// Stub for Phase D6
 func showNotification(title, message string) {
-	log.Printf("Notification [%s]: %s\n", title, message)
+	beeep.Notify(title, message, "")
 }

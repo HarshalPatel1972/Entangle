@@ -1,7 +1,7 @@
 package main
 
 import (
-	"log"
+	"fmt"
 
 	"fyne.io/systray"
 	"entangle/desktop/icon"
@@ -14,9 +14,14 @@ func main() {
 func onReady() {
 	systray.SetIcon(icon.Data)
 	systray.SetTitle("Entangle")
-	systray.SetTooltip("Entangle — Ready to receive")
+	ip := getLocalIP()
+	if ip == "" {
+		ip = "Unknown IP"
+	}
 
-	mStatus := systray.AddMenuItem("● Ready", "")
+	systray.SetTooltip(fmt.Sprintf("Entangle — %s:7297", ip))
+
+	mStatus := systray.AddMenuItem(fmt.Sprintf("● Ready — %s", ip), "")
 	mStatus.Disable() // informational only
 
 	systray.AddSeparator()
@@ -35,8 +40,7 @@ func onReady() {
 		for {
 			select {
 			case <-mOpen.ClickedCh:
-				// TODO: openDownloadsFolder()
-				log.Println("Open Downloads clicked")
+				openDownloadsFolder()
 			case <-mQuit.ClickedCh:
 				systray.Quit()
 			}
